@@ -1,0 +1,19 @@
+.foto-analyze-button {
+    background-color: #00b42d;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+.foto-analyze-button:hover {
+    background-color: #06aa66;
+}
+.foto-analyze-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

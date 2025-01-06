@@ -1,0 +1,26 @@
+.fb-login-button {
+    background-color: #1877f2;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.fb-login-button:hover {
+    background-color: #166fe5;
+}
+.fb-login-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+.fb-login-button i {
+    margin-right: 7px;
+    font-size: 25px;
+}
