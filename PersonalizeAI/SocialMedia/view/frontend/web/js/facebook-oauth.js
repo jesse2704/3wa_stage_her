@@ -57,7 +57,7 @@ define(['jquery'], function($) {
                     lastname: response.last_name,
                     name: response.name,
                     email: response.email,
-                    profile_picture_url: response.picture.data.url,
+                    profile_pic_url: response.picture.data.url,
                     gender: response.gender,
                     birthday: response.birthday,
                     hometown: response.hometown.name,
@@ -81,3 +81,5 @@ define(['jquery'], function($) {
         }
     };
 });
+
+

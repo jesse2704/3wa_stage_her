@@ -4,15 +4,21 @@
  *  @var \Magento\Framework\Escaper $escaper
 **/
 ?>
+<?php if($block->getModuleStatus()): ?>
 <h3>Personalize by picture</h3>
-<p>Upload a picture of yourself, we personlize on your appearance. When you don't upload a photo we use your Facebook profile picture</p>
+<?php if (!$block->isLoggedIn()): ?>
+    <p>Upload a picture of yourself, we personlize on your appearance.</p>
+<?php elseif ($block->isLoggedIn() && $block->getFacebookProfilePicUrl()): ?>
+    <p>Upload a picture of yourself, we personlize on your appearance. When you don't upload a photo we use your Facebook profile picture</p>
+<?php else: ?>
+    <p>Upload a picture of yourself, we personlize on your appearance. Or link your Facebook so we can use your Facebook profile picture</p>
+<?php endif; ?>
 <input id="file" type="file"><br/>
 <button class="foto-analyze-button" onclick="analyzeFacebookProfilePic()">Analyze your picture</button>
 <div id="result"></div>
 
 <br/>
-
-
+<?php endif; ?>
 <script>
     async function analyzeFacebookProfilePic() {
         const imageInput = document.getElementById('file'); 

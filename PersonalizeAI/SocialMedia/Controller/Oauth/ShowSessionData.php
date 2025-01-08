@@ -53,7 +53,7 @@ class ShowSessionData extends Action
             'facebook_id' => $facebookId,
             'name' => $facebookName,
             'email' => $facebookEmail,
-            'profile_picture_url' => $facebookProfilePicUrl,
+            'profile_pic_url' => $facebookProfilePicUrl,
             'gender' => $facebookGender,
             'birthday' => $facebookBirthday,
             'hometown' => $facebookHometown,
