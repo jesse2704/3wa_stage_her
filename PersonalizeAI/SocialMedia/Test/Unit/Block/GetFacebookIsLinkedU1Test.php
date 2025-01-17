@@ -7,7 +7,7 @@ use Magento\Framework\View\Element\Template\Context;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class GetFacebookIsLinkedTest extends TestCase
+class GetFacebookIsLinkedU1Test extends TestCase
 {
     /**
      * @var FacebookOAuth
@@ -26,13 +26,17 @@ class GetFacebookIsLinkedTest extends TestCase
     
     protected function setUp(): void
     {
+        // Create a mock for the Template context
         $this->contextMock = $this->createMock(Context::class);
+        
+        // Create a mock for the CustomerSession with specific methods
         $this->customerSessionMock = $this->getMockBuilder(CustomerSession::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['isLoggedIn'])
             ->addMethods(['getFacebookName'])
             ->getMock();
     
+        // Instantiate the FacebookOAuth block with mocked dependencies
         $this->facebookOAuth = new FacebookOAuth(
             $this->contextMock,
             $this->customerSessionMock
@@ -41,24 +45,39 @@ class GetFacebookIsLinkedTest extends TestCase
     
     public function testGetFacebookIsLinkedWhenLoggedInAndLinked()
     {
+        // Arrange: Simulate that the user is logged in and Facebook is linked
         $this->customerSessionMock->method('isLoggedIn')->willReturn(true);
-        $this->customerSessionMock->method('getFacebookName')->willReturn('John Do');
+        $this->customerSessionMock->method('getFacebookName')->willReturn('John Doe');
 
-        $this->assertTrue($this->facebookOAuth->getFacebookIsLinked());
+        // Act: Call the method under test
+        $result = $this->facebookOAuth->getFacebookIsLinked();
+
+        // Assert: Check that the method returns true when logged in and linked
+        $this->assertTrue($result);
     }
 
     public function testGetFacebookIsLinkedWhenLoggedInButNotLinked()
     {
+        // Arrange: Simulate that the user is logged in but Facebook is not linked
         $this->customerSessionMock->method('isLoggedIn')->willReturn(true);
         $this->customerSessionMock->method('getFacebookName')->willReturn(null);
 
-        $this->assertFalse($this->facebookOAuth->getFacebookIsLinked());
+        // Act: Call the method under test
+        $result = $this->facebookOAuth->getFacebookIsLinked();
+
+        // Assert: Check that the method returns false when logged in but not linked
+        $this->assertFalse($result);
     }
 
     public function testGetFacebookIsLinkedWhenNotLoggedIn()
     {
+        // Arrange: Simulate that the user is not logged in
         $this->customerSessionMock->method('isLoggedIn')->willReturn(false);
 
-        $this->assertFalse($this->facebookOAuth->getFacebookIsLinked());
+        // Act: Call the method under test
+        $result = $this->facebookOAuth->getFacebookIsLinked();
+
+        // Assert: Check that the method returns false when not logged in
+        $this->assertFalse($result);
     }
 }

@@ -32,7 +32,8 @@ class GetFacebookProfilePictureU4Test extends TestCase
         // Create a mock for the CustomerSession with specific methods
         $this->customerSessionMock = $this->getMockBuilder(CustomerSession::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['isLoggedIn', 'getFacebookProfilePicUrl'])
+            ->onlyMethods(['isLoggedIn'])
+            ->addMethods(['getFacebookProfilePicUrl'])
             ->getMock();
 
         // Instantiate the FacebookOAuth block with mocked dependencies
@@ -62,13 +63,13 @@ class GetFacebookProfilePictureU4Test extends TestCase
 
     public function testGetFacebookProfilePicUrlWhenNotLoggedIn()
     {
-        // Arrange: Simulate that the user is not logged in
+    // Arrange: Simulate that the user is not logged in
         $this->customerSessionMock->method('isLoggedIn')->willReturn(false);
 
-        // Act: Call the method under test
+    // Act: Call the method under test
         $result = $this->facebookOAuth->getFacebookProfilePicUrl();
 
-        // Assert: Check that false is returned when not logged in
+    // Assert: Check that false is returned when not logged in
         $this->assertFalse($result);
     }
 
@@ -81,7 +82,7 @@ class GetFacebookProfilePictureU4Test extends TestCase
         // Act: Call the method under test
         $result = $this->facebookOAuth->getFacebookProfilePicUrl();
 
-        // Assert: Check that false is returned when no picture URL is available
-        $this->assertFalse($result);
+        // Assert: Check that null is returned when no picture URL is available
+        $this->assertNull($result);
     }
 }

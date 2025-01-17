@@ -10,8 +10,8 @@ class FacebookOAuth extends Template
     protected $customerSession;
 
     public function __construct(
-        Context $context,
         Session $customerSession,
+        Context $context,
         array $data = []
     ) {
         $this->customerSession = $customerSession;
@@ -85,29 +85,47 @@ class FacebookOAuth extends Template
     }
 
     /**
-     * Retrieve Facebook Languages from session
+     * Retrieve Facebook languages from session
      *
      * @return string|null
      */
     public function getFacebookLanguages()
     {
-        $facebookEmail = $this->customerSession->getFacebookLanguages();
-        return !empty($facebookEmail) ? $facebookEmail : 'Facebook Email not set';
+        return $this->customerSession->getFacebookLanguages();
     }
 
+    /**
+     * Retrieve Facebook first name from session
+     *
+     * @return string|null
+     */
+    public function getFacebookFirstName()
+    {
+        return $this->customerSession->getFacebookFirstName();
+    }
 
     /**
-    * Retrieve Facebook name from session
-    *
-    * @return string|null
-    */
+     * Retrieve Facebook last name from session
+     *
+     * @return string|null
+     */
+    public function getFacebookLastName()
+    {
+        return $this->customerSession->getFacebookLastName();
+    }
+
+    /**
+     * Retrieve Facebook name from session
+     *
+     * @return string|null
+     */
     public function getFacebookName()
     {
         return $this->customerSession->getFacebookName();
     }
 
     /**
-     * Retrieve Facebook Email from session
+     * Retrieve Facebook email from session
      *
      * @return string|null
      */
@@ -118,90 +136,90 @@ class FacebookOAuth extends Template
     }
 
    /**
-     * Retrieve Facebook Gender from session
-     *
-     * @return string|null
-     */
-   public function getFacebookGender()
-   {
-       $facebookGender = $this->customerSession->getFacebookGender();
-       return !empty($facebookGender) ? $facebookGender : 'Gender not set';
-   }
+    * Retrieve Facebook gender from session
+    *
+    * @return string|null
+    */
+    public function getFacebookGender()
+    {
+        $facebookGender = $this->customerSession->getFacebookGender();
+        return !empty($facebookGender) ? $facebookGender : 'Gender not set';
+    }
 
    /**
-     * Retrieve Facebook Birthday from session
-     *
-     * @return string|null
-     */
-   public function getFacebookBirthday()
-   {
-       $facebookBirthday = $this->customerSession->getFacebookBirthday();
-       return !empty($facebookBirthday) ? $facebookBirthday : 'Birthday not set';
-   }
+    * Retrieve Facebook birthday from session
+    *
+    * @return string|null
+    */
+    public function getFacebookBirthday()
+    {
+        $facebookBirthday = $this->customerSession->getFacebookBirthday();
+        return !empty($facebookBirthday) ? $facebookBirthday : 'Birthday not set';
+    }
 
    /**
-     * Retrieve Facebook Hometown from session
-     *
-     * @return string|null
-     */
-   public function getFacebookHometown()
-   {
-       $facebookHometown = $this->customerSession->getFacebookHometown();
-       return !empty($facebookHometown) ? $facebookHometown : 'Hometown not set';
-   }
+    * Retrieve Facebook hometown from session
+    *
+    * @return string|null
+    */
+    public function getFacebookHometown()
+    {
+        $facebookHometown = $this->customerSession->getFacebookHometown();
+        return !empty($facebookHometown) ? $facebookHometown : 'Hometown not set';
+    }
 
    /**
-     * Retrieve Facebook Location from session
-     *
-     * @return array|string|null
-     */
-   public function getFacebookLocation()
-   {
-       $facebookLocation = $this->customerSession->getFacebookLocation();
-       return !empty($facebookLocation) ? $facebookLocation : 'Location not set';
-   }
+    * Retrieve Facebook location from session
+    *
+    * @return array|string|null
+    */
+    public function getFacebookLocation()
+    {
+        $facebookLocation = $this->customerSession->getFacebookLocation();
+        return !empty($facebookLocation) ? $facebookLocation : 'Location not set';
+    }
 
    /**
-     * Retrieve Facebook Country from session
-     *
-     * @return string|null
-     */
-   public function getFacebookCountry()
-   {
-       $facebookCountry = $this->customerSession->getFacebookCountry();
-       return !empty($facebookCountry) ? $facebookCountry : 'Country not set';
-   }
+    * Retrieve Facebook country from session
+    *
+    * @return string|null
+    */
+    public function getFacebookCountry()
+    {
+        $facebookCountry = $this->customerSession->getFacebookCountry();
+        return !empty($facebookCountry) ? $facebookCountry : 'Country not set';
+    }
 
    /**
-     * Retrieve Facebook Posts from session
-     *
-     * @return array|string|null
-     */
-   public function getFacebookPosts()
-   {
-       $facebookPosts = $this->customerSession->getFacebookPosts();
-       return !empty($facebookPosts) ? $facebookPosts : 'No posts found';
-   }
+    * Retrieve Facebook posts from session
+    *
+    * @return array|string|null
+    */
+    public function getFacebookPosts()
+    {
+        $facebookPosts = $this->customerSession->getFacebookPosts();
+        return !empty($facebookPosts) ? $facebookPosts : 'No posts found';
+    }
 
    /**
-     * Retrieve Facebook Likes from session
-     *
-     * @return array|string|null
-     */
-   public function getFacebookLikes()
-   {
-       $facebookLikes = $this->customerSession->getFacebookLikes();
-       return !empty($facebookLikes) ? $facebookLikes : 'No likes found';
-   }
+    * Retrieve Facebook likes from session
+    *
+    * @return array|string|null
+    */
+    public function getFacebookLikes()
+    {
+        $facebookLikes = $this->customerSession->getFacebookLikes();
+        return !empty($facebookLikes) ? $facebookLikes : 'No likes found';
+    }
 
    /**
-     * Retrieve Facebook Favorite Teams from session
-     *
-     * @return array|string|null
-     */
-   public function getFacebookFavoriteTeams()
-   {
-       $facebookFavoriteTeams = $this->customerSession->getFacebookFavoriteTeams();
-       return !empty($facebookFavoriteTeams) ? $facebookFavoriteTeams : 'No favorite teams found';
-   }
+    * Retrieve Facebook favorite teams from session
+    *
+    * @return array|string|null
+    */
+    public function getFacebookFavoriteTeams()
+    {
+        $facebookFavoriteTeams = $this->customerSession->getFacebookFavoriteTeams();
+        return !empty($facebookFavoriteTeams) ? $facebookFavoriteTeams : 'No favorite teams found';
+    }
 }

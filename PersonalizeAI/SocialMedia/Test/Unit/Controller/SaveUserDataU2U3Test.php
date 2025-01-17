@@ -9,10 +9,10 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\App\RequestInterface;
 
-// Document is for UnitTest 2 -- and 3 
+// This test class covers Unit Tests 2 and 3 for the SaveUserData controller
 class SaveUserDataU2U3Test extends TestCase
 {
-    protected $controller; // The controller being tested
+    protected $controller; // The SaveUserData controller being tested
     protected $contextMock; // Mock for the action context
     protected $customerSessionMock; // Mock for the customer session
     protected $resultJsonFactoryMock; // Mock for the JSON result factory
@@ -24,7 +24,7 @@ class SaveUserDataU2U3Test extends TestCase
         // Create a mock for the context
         $this->contextMock = $this->createMock(Context::class);
         
-        // Create a mock for the customer session with expected setter methods
+        // Create a mock for the customer session with all expected setter methods
         $this->customerSessionMock = $this->getMockBuilder(CustomerSession::class)
             ->disableOriginalConstructor()
             ->addMethods([
@@ -35,13 +35,9 @@ class SaveUserDataU2U3Test extends TestCase
             ])
             ->getMock();
 
-        // Create a mock for the JSON result factory
+        // Create mocks for other dependencies
         $this->resultJsonFactoryMock = $this->createMock(JsonFactory::class);
-        
-        // Create a mock for the request
         $this->requestMock = $this->createMock(RequestInterface::class);
-        
-        // Create a mock for the JSON result
         $this->resultJsonMock = $this->createMock(Json::class);
 
         // Configure the context mock to return the request mock
@@ -54,7 +50,7 @@ class SaveUserDataU2U3Test extends TestCase
             ->method('create')
             ->willReturn($this->resultJsonMock);
 
-        // Instantiate the controller with mocked dependencies
+        // Instantiate the SaveUserData controller with mocked dependencies
         $this->controller = new SaveUserData(
             $this->contextMock,
             $this->customerSessionMock,
@@ -62,6 +58,7 @@ class SaveUserDataU2U3Test extends TestCase
         );
     }
 
+    // Unit Test 2: Test execution with valid user data
     public function testExecuteWithValidData()
     {
         // Arrange: Set up valid user data
@@ -84,7 +81,7 @@ class SaveUserDataU2U3Test extends TestCase
             'favorite_teams' => ['team1', 'team2']
         ];
 
-        // Configure the request to return parameters from userData
+        // Configure the request mock to return parameters from userData
         $this->requestMock->expects($this->any())
             ->method('getParam')
             ->willReturnCallback(function ($key) use ($userData) {
@@ -96,11 +93,11 @@ class SaveUserDataU2U3Test extends TestCase
             $method = 'setFacebook' . str_replace('_', '', ucwords($key, '_'));
             $this->customerSessionMock->expects($this->once())
                 ->method($method)
-                ->with($value) // Expect that the setter is called with the correct value
+                ->with($value)
                 ->willReturnSelf();
         }
 
-    // ## Unit test 3 ## Check that setData is called with the expected success message 
+        // Unit Test 3: Check that setData is called with the expected success message 
         $this->resultJsonMock->expects($this->once())
             ->method('setData')
             ->with(['success' => true, 'message' => 'User data saved successfully'])
@@ -113,6 +110,7 @@ class SaveUserDataU2U3Test extends TestCase
         $this->assertSame($this->resultJsonMock, $result);
     }
 
+    // Test execution with invalid user data
     public function testExecuteWithInvalidData()
     {
         // Arrange: Simulate invalid data by returning null for all parameters

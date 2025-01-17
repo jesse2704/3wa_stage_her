@@ -1,0 +1,46 @@
+<?php
+/** @var \PersonalizeAI\SocialMedia\Block\Language $block */
+?>
+<?php
+$currentLanguage = $block->getCurrentLanguage();
+$current = $currentLanguage === 'nl_NL' ? 'Nederlands' : ($currentLanguage === 'en_GB' ? 'Engels' : 'Onbekend');
+$prefer = !empty($block->getFacebookLanguages()) ? $block->getFacebookLanguages()[0]['name'] : $current;
+$request = ($prefer === 'Engels') ? 'default' : ($prefer === 'Nederlands' ? 'NL' : '');
+
+
+if ($current !== $prefer): ?> 
+<div>
+    <p>
+        <?php if ($current == 'Engels'): ?> 
+                We hebben opgemerkt dat je gewenste taal Nederlands is, alleen de huidige taal is 
+                <?= $block->escapeHtml($current)?>
+                Wilt u de taal veranderen?
+            <?php elseif ($current == 'Nederlands'): ?>
+                We noticed your prefered language is English, but the current language is
+                <?= $block->escapeHtml($current)?>
+                Do you want to change the language?
+            <?php endif; ?>
+    </p>
+    <button id="changeStoreViewButton" type="button" onclick="changeStoreView('<?= $block->escapeHtml($prefer)?>')">
+        Wissel Store View
+    </button>
+</div>
+
+<hr/>
+
+<?php endif; ?>
+<script>
+function changeStoreView(lang) {
+    var request = (lang === 'Engels') ? 'default' : (lang === 'Nederlands' ? 'NL' : '');
+
+    var urls = {
+        'default': '<?= $block->escapeHtml($block->changeStoreView("default")) ?>',
+        'NL': '<?= $block->escapeHtml($block->changeStoreView("NL")) ?>',
+        '': '<?= $block->escapeHtml($block->changeStoreView($request)) ?>'
+    };
+
+    var url = urls[request] || urls[''];
+
+    window.location.href = url;
+}
+</script>

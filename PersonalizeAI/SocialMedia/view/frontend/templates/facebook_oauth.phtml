@@ -4,13 +4,18 @@
 
 <?php if ($block->isLoggedIn() && $block->getModuleStatus()): ?>
 
- <!-- Container for Facebook OAuth elements -->   
-<div id="facebook-oauth-container"> 
-    <!-- Button for linking Facebook account -->
-    <button id="loginBtn" class="fb-login-button" <?= $block->getFacebookIsLinked() ? 'disabled' : ''; ?>> 
-        <i class="ph ph-facebook-logo"></i>
-        <?= $block->escapeHtml(__('Link your Facebook')) ?>
-    </button>
+    <div id="facebook-oauth-container">
+    <?php if (!$block->getFacebookIsLinked()): ?>
+        <button id="loginBtn" class="fb-button fb-login-button">
+            <i class="ph ph-facebook-logo"></i>
+            <span><?= $escaper->escapeHtml(__('Link Facebook')) ?></span>
+        </button>
+    <?php else: ?>
+        <button id="unlinkBtn" class="fb-button fb-unlink-button">
+            <i class="ph ph-facebook-logo"></i>
+            <span><?= $escaper->escapeHtml(__('Unlink Facebook')) ?></span>
+        </button>
+    <?php endif; ?>
 </div>
 
 <script>
@@ -18,9 +23,8 @@
     require(['jquery', 'PersonalizeAI_SocialMedia/js/facebook-oauth'], function($, facebookOAuth) {
         
         // Initialize the Facebook OAuth module with the application ID
-        facebookOAuth.init('<?= $block->escapeJs($block->getAppId()) ?>'); 
+        facebookOAuth.init('<?= $escaper->escapeJs($block->getAppId()) ?>'); 
     });
 </script>
 <hr>
 <?php endif; ?>
-
